@@ -84,7 +84,11 @@ function getClientIp(req) {
             req.socket.remoteAddress ||
             req.connection.socket.remoteAddress; // for https
     }
-
+    // NOT LOCAL IP v6
+    var ip6 = /::ffff:(.*)+/.exec(ipAddress);
+    if (ip6) {
+        ipAddress = ip6[1];
+    }
     return ipAddress;
 }
 
